@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title || 'DexInventory' %></title>
+    <link href="/css/style.css" rel="stylesheet" />
+  </head>
+
+  <body>
+
+    <header>
+    <div class="header-content">
+        <h1><%= title || 'DexInventory' %></h1>
+        
+        <% if (user) { %>
+        <div class="header-right">
+            <span class="welcome-text">Welcome, <%= user.username %>!</span>
+            <form action="/logout" method="POST" class="logout-form">
+            <button type="submit" class="logout-btn">Logout</button>
+            </form>
+        </div>
+        <% } else { %>
+        <nav class="auth-nav">
+            <a href="/login">Login</a>
+            <a href="/signup">Sign Up</a>
+        </nav>
+        <% } %>
+    </div>
+    </header>
+
+    <main>
+      <% if (typeof errors !== 'undefined' && errors.length > 0) { %>
+        <div class="error-messages">
+          <% errors.forEach(error => { %>
+            <p><%= error.msg %></p>
+          <% }); %>
+        </div>
+      <% } %>
+
+      <% if (typeof success !== 'undefined' && success) { %>
+        <div class="success-message">
+          <p><%= success %></p>
+        </div>
+      <% } %>
+
+      <div id="content">
+        <%- body %>
+      </div>
+    </main>
+  
+    <footer>
+      <p>
+        ©
+        <script>
+          document.write(new Date().getFullYear());
+        </script>
+        Tony Li
+      </p>
+
+      <a href="https://github.com/TonyLi0916" target="_blank">
+        <img src="/imgs/github-mark.svg" alt="GitHub" />
+      </a>
+    </footer>
+  </body>
+</html>

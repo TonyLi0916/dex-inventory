@@ -1,0 +1,71 @@
+<%- include('../layout', { 
+  title: title,
+  body: `
+    <div class="collection-page">
+      <a href="/dashboard" class="back-link">← Back to Dashboard</a>
+      <div class="page-header">
+        
+        <h2>My Sealed Products</h2>
+        <a href="/sealed/new" class="btn btn-primary">+ Add Sealed Product</a>
+      </div>
+
+      ${stats ? `
+        <div class="collection-stats">
+          <div class="stat-item">
+            <span class="stat-label">Total Value:</span>
+            <span class="stat-value">$${parseFloat(stats.total_value).toFixed(2)}</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Total Products:</span>
+            <span class="stat-value">${stats.total_quantity}</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Unique Products:</span>
+            <span class="stat-value">${stats.unique_products}</span>
+          </div>
+        </div>
+      ` : ''}
+
+      ${sealed.length > 0 ? `
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Product Name</th>
+                <th>Type</th>
+                <th>Qty</th>
+                <th>Purchase</th>
+                <th>Market</th>
+                <th>Total Value</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${sealed.map(product => `
+                <tr>
+                  <td>${product.product_name}</td>
+                  <td>${product.product_type}</td>
+                  <td>${product.quantity}</td>
+                  <td>$${parseFloat(product.purchase_price).toFixed(2)}</td>
+                  <td>$${parseFloat(product.market_price).toFixed(2)}</td>
+                  <td>$${(parseFloat(product.market_price) * product.quantity).toFixed(2)}</td>
+                  <td class="action-buttons">
+                    <a href="/sealed/${product.id}/edit" class="btn-small btn-edit">Edit</a>
+                    <form method="POST" action="/sealed/${product.id}/delete" style="display: inline;">
+                      <button type="submit" class="btn-small btn-delete" onclick="return confirm('Delete this product?')">Delete</button>
+                    </form>
+                  </td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>
+      ` : `
+        <div class="empty-state">
+          <p>No sealed products in your collection yet.</p>
+          <a href="/sealed/new" class="btn btn-primary">Add Your First Sealed Product</a>
+        </div>
+      `}
+    </div>
+  `
+}) %>

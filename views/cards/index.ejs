@@ -1,0 +1,73 @@
+<%- include('../layout', { 
+  title: title,
+  body: `
+    <div class="collection-page">
+      <a href="/dashboard" class="back-link">← Back to Dashboard</a>
+      <div class="page-header">
+        
+        <h2>My Card Collection</h2>
+        <a href="/cards/new" class="btn btn-primary">+ Add Card</a>
+      </div>
+
+      ${stats ? `
+        <div class="collection-stats">
+          <div class="stat-item">
+            <span class="stat-label">Total Value:</span>
+            <span class="stat-value">$${parseFloat(stats.total_value).toFixed(2)}</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Total Cards:</span>
+            <span class="stat-value">${stats.total_quantity}</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Unique Cards:</span>
+            <span class="stat-value">${stats.unique_cards}</span>
+          </div>
+        </div>
+      ` : ''}
+
+      ${cards.length > 0 ? `
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Set</th>
+                <th>Condition</th>
+                <th>Qty</th>
+                <th>Purchase</th>
+                <th>Market</th>
+                <th>Total Value</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${cards.map(card => `
+                <tr>
+                  <td>${card.name}</td>
+                  <td>${card.set_name || '-'}</td>
+                  <td>${card.condition}</td>
+                  <td>${card.quantity}</td>
+                  <td>$${parseFloat(card.purchase_price).toFixed(2)}</td>
+                  <td>$${parseFloat(card.market_price).toFixed(2)}</td>
+                  <td>$${(parseFloat(card.market_price) * card.quantity).toFixed(2)}</td>
+                  <td class="action-buttons">
+                    <a href="/cards/${card.id}/edit" class="btn-small btn-edit">Edit</a>
+                    <form method="POST" action="/cards/${card.id}/delete" style="display: inline;">
+                      <button type="submit" class="btn-small btn-delete" onclick="return confirm('Delete this card?')">Delete</button>
+                    </form>
+                  </td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>
+      ` : `
+        <div class="empty-state">
+          <p>No cards in your collection yet.</p>
+          <a href="/cards/new" class="btn btn-primary">Add Your First Card</a>
+        </div>
+      `}
+    </div>
+  `
+}) %>

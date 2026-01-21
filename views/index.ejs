@@ -1,0 +1,16 @@
+<%- include('layout', { 
+  title: 'DexInventory 🖥️',
+  body: `
+    <div class="welcome">
+      <h2>Track Your Pokémon Collection</h2>
+      <p>Manage your singles, sealed products, and compare collections with friends.</p>
+      
+      ${user ? `
+        <script>window.location.href = '/dashboard';</script>
+      ` : `
+        <p class="subtitle">Sign up to start tracking your Pokémon card collection and sealed products.</p>
+        <img src="/imgs/graphy.gif" alt="Collection tracking visualization" class="welcome-gif">
+      `}
+    </div>
+  `
+}) %>

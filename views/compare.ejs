@@ -1,0 +1,121 @@
+<%- include('layout', { 
+  title: title,
+  body: `
+    <div class="compare-page">
+      <a href="/dashboard" class="back-link">← Back to Dashboard</a>
+      
+      <h2>Compare Collections</h2>
+      <div class="compare-form">
+        <form method="POST" action="/compare">
+          <div class="form-group">
+            <label for="compareUserId">Select a user to compare with:</label>
+            <select id="compareUserId" name="compareUserId" required>
+              <option value="">-- Select User --</option>
+              ${users.map(user => `
+                <option value="${user.id}">${user.username}</option>
+              `).join('')}
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary">Compare</button>
+        </form>
+      </div>
+
+      ${comparison ? `
+        <div class="comparison-results">
+          <h3>Comparison Results</h3>
+          
+          <div class="comparison-grid">
+            <div class="comparison-card">
+              <h4>${comparison.user1.username}</h4>
+              <div class="comparison-stats">
+                <p class="total-value">$${comparison.user1.totalValue.toFixed(2)}</p>
+                <p class="stat-label">Total Collection Value</p>
+                
+                <div class="breakdown">
+                  <div class="breakdown-item">
+                    <strong>Cards:</strong>
+                    <span>$${parseFloat(comparison.user1.cards.total_value).toFixed(2)}</span>
+                  </div>
+                  <div class="breakdown-item">
+                    <strong>Total Cards:</strong>
+                    <span>${comparison.user1.cards.total_quantity}</span>
+                  </div>
+                  <div class="breakdown-item">
+                    <strong>Unique Cards:</strong>
+                    <span>${comparison.user1.cards.unique_cards}</span>
+                  </div>
+                </div>
+
+                <div class="breakdown">
+                  <div class="breakdown-item">
+                    <strong>Sealed:</strong>
+                    <span>$${parseFloat(comparison.user1.sealed.total_value).toFixed(2)}</span>
+                  </div>
+                  <div class="breakdown-item">
+                    <strong>Total Products:</strong>
+                    <span>${comparison.user1.sealed.total_quantity}</span>
+                  </div>
+                  <div class="breakdown-item">
+                    <strong>Unique Products:</strong>
+                    <span>${comparison.user1.sealed.unique_products}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="vs-divider">
+              <span>VS</span>
+            </div>
+
+            <div class="comparison-card">
+              <h4>${comparison.user2.username}</h4>
+              <div class="comparison-stats">
+                <p class="total-value">$${comparison.user2.totalValue.toFixed(2)}</p>
+                <p class="stat-label">Total Collection Value</p>
+                
+                <div class="breakdown">
+                  <div class="breakdown-item">
+                    <strong>Cards:</strong>
+                    <span>$${parseFloat(comparison.user2.cards.total_value).toFixed(2)}</span>
+                  </div>
+                  <div class="breakdown-item">
+                    <strong>Total Cards:</strong>
+                    <span>${comparison.user2.cards.total_quantity}</span>
+                  </div>
+                  <div class="breakdown-item">
+                    <strong>Unique Cards:</strong>
+                    <span>${comparison.user2.cards.unique_cards}</span>
+                  </div>
+                </div>
+
+                <div class="breakdown">
+                  <div class="breakdown-item">
+                    <strong>Sealed:</strong>
+                    <span>$${parseFloat(comparison.user2.sealed.total_value).toFixed(2)}</span>
+                  </div>
+                  <div class="breakdown-item">
+                    <strong>Total Products:</strong>
+                    <span>${comparison.user2.sealed.total_quantity}</span>
+                  </div>
+                  <div class="breakdown-item">
+                    <strong>Unique Products:</strong>
+                    <span>${comparison.user2.sealed.unique_products}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="winner-banner">
+            ${comparison.user1.totalValue > comparison.user2.totalValue 
+              ? `<p>🏆 ${comparison.user1.username} has a higher collection value!</p>`
+              : comparison.user2.totalValue > comparison.user1.totalValue
+              ? `<p>🏆 ${comparison.user2.username} has a higher collection value!</p>`
+              : `<p>🤝 Both collections have equal value!</p>`
+            }
+          </div>
+        </div>
+      ` : ''}
+    </div>
+  `
+}) %>

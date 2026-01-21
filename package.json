@@ -1,0 +1,34 @@
+{
+  "name": "dex-inventory",
+  "version": "1.0.0",
+  "description": "Collectr-style Pokémon collection tracking app with multiple users",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "db:init": "node db/init.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TonyLi0916/dex-inventory.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TonyLi0916/dex-inventory/issues"
+  },
+  "homepage": "https://github.com/TonyLi0916/dex-inventory#readme",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "dotenv": "^17.2.3",
+    "ejs": "^4.0.1",
+    "express": "^5.2.1",
+    "express-session": "^1.18.2",
+    "express-validator": "^7.3.1",
+    "pg": "^8.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.11"
+  }
+}

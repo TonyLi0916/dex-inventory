@@ -1,0 +1,67 @@
+<%- include('layout', { 
+  title: title,
+  body: `
+    <div class="dashboard">
+      <h2>Your Collection Dashboard</h2>
+      
+      ${stats ? `
+        <div class="stats-grid">
+          <div class="stat-card highlight">
+            <h3>Total Collection Value ⚡️</h3>
+            <p class="stat-value">$${stats.totalValue}</p>
+            <p class="stat-label">Current Market Value</p>
+          </div>
+
+          <div class="stat-card">
+            <h3>Total Cost 💵</h3>
+            <p class="stat-value">$${stats.totalCost}</p>
+            <p class="stat-label">Amount Invested</p>
+          </div>
+
+          <div class="stat-card ${parseFloat(stats.unrealizedGain) >= 0 ? 'positive' : 'negative'}">
+            <h3>Unrealized Gain/Loss 📈</h3>
+            <p class="stat-value">${parseFloat(stats.unrealizedGain) >= 0 ? '+' : ''}$${stats.unrealizedGain}</p>
+            <p class="stat-label">${parseFloat(stats.unrealizedGain) >= 0 ? '+' : ''}${stats.percentageGain}%</p>
+          </div>
+        </div>
+
+        <div class="collection-breakdown">
+          <div class="breakdown-card">
+            <h3>Single Card 🂡</h3>
+            <div class="breakdown-stats">
+              <p><strong>Value:</strong> $${stats.cards.value}</p>
+              <p><strong>Total Cards:</strong> ${stats.cards.quantity}</p>
+              <p><strong>Unique Cards:</strong> ${stats.cards.unique}</p>
+            </div>
+            <a href="/cards" class="btn btn-primary">Manage Cards</a>
+          </div>
+
+          <div class="breakdown-card">
+            <h3>Sealed Products 📦</h3>
+            <div class="breakdown-stats">
+              <p><strong>Value:</strong> $${stats.sealed.value}</p>
+              <p><strong>Total Products:</strong> ${stats.sealed.quantity}</p>
+              <p><strong>Unique Products:</strong> ${stats.sealed.unique}</p>
+            </div>
+            <a href="/sealed" class="btn btn-primary">Manage Sealed</a>
+          </div>
+        </div>
+
+        <div class="quick-actions ⚡️">
+          <h3>Quick Actions</h3>
+          <div class="action-buttons">
+            <a href="/cards/new" class="btn btn-secondary">+ Add Card</a>
+            <a href="/sealed/new" class="btn btn-secondary">+ Add Sealed Product</a>
+            <a href="/compare" class="btn btn-secondary">Compare Collections</a>
+          </div>
+        </div>
+      ` : `
+        <p class="no-data">No collection data available yet. Start adding cards and sealed products!</p>
+        <div class="action-buttons">
+          <a href="/cards/new" class="btn btn-primary">Add Your First Card</a>
+          <a href="/sealed/new" class="btn btn-primary">Add Sealed Product</a>
+        </div>
+      `}
+    </div>
+  `
+}) %>
