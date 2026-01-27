@@ -43,6 +43,10 @@ https://dex-inventory-production.up.railway.app/
 ## 📸 Screenshots
 
 ---
+<img width="1456" height="764" alt="Screenshot 2026-01-27 at 6 03 43 PM" src="https://github.com/user-attachments/assets/ccb445c7-0e73-4303-b3be-70829814abd9" />
+<img width="1470" height="768" alt="Screenshot 2026-01-27 at 6 03 57 PM" src="https://github.com/user-attachments/assets/4f87ce3f-ea58-40dd-a2e1-332faaeddfb0" />
+<img width="1470" height="767" alt="Screenshot 2026-01-27 at 6 05 06 PM" src="https://github.com/user-attachments/assets/3e56e736-7eeb-41cf-af30-31849d2c573a" />
+<img width="903" height="689" alt="Screenshot 2026-01-27 at 6 05 21 PM" src="https://github.com/user-attachments/assets/91625db5-7fcc-4237-8165-7cb24cf1ef69" />
 
 ## 🚀 Getting Started
 
