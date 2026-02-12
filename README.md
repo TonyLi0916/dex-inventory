@@ -17,6 +17,7 @@ https://dex-inventory-production.up.railway.app/
 - 🔐 Authenticated, user-specific inventories
 - 📊 Structured inventory views and summaries
 - 🎨 Responsive UI for desktop and mobile
+- 💰 eBay price lookup for cards and sealed products via Browse API
 - 🛠️ Backend designed for extensibility and future analysis
 
 ---
@@ -33,6 +34,7 @@ https://dex-inventory-production.up.railway.app/
 
 - Node.js
 - Express.js
+- eBay Browse API (OAuth 2.0)
 
 **Database**
 
@@ -86,6 +88,11 @@ DB_PORT=5432
 DB_USER=your_user
 DB_PASSWORD=your_password
 DB_NAME=dexinventory
+
+# eBay API (optional - for price lookups)
+EBAY_CLIENT_ID=your_ebay_client_id
+EBAY_CLIENT_SECRET=your_ebay_client_secret
+EBAY_ENVIRONMENT=PRODUCTION
 ```
 
 ---
@@ -102,10 +109,3 @@ The app will run locally at:
 
 http://localhost:3000
 
----
-
-## 🧠 Project Status
-
-🚧 **Actively in Development**
-
-Déxinventory is currently being expanded with valuation and analytics features, including planned integration with the **eBay API** to analyze recent last-sold data over multiple time windows (e.g., 7 / 30 / 90 days) and support basic price comparisons.

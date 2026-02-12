@@ -67,11 +67,11 @@ function showPriceModal(priceData, itemType) {
     </div>
     <div class="price-details">
       <div class="price-detail-row">
-        <span class="price-detail-label">Average Price:</span>
+        <span class="price-detail-label">Average Price (USD):</span>
         <span class="price-detail-value highlight">$${priceData.averagePrice.toFixed(2)}</span>
       </div>
       <div class="price-detail-row">
-        <span class="price-detail-label">Price Range:</span>
+        <span class="price-detail-label">Price Range (USD):</span>
         <span class="price-detail-value">$${priceData.minPrice.toFixed(2)} - $${priceData.maxPrice.toFixed(2)}</span>
       </div>
       <div class="price-detail-row">

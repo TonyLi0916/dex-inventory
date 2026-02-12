@@ -84,8 +84,8 @@
 
           if (data.success) {
             alert('eBay Price Check (Active Listings):\\n\\n' +
-                  'Average: $' + data.data.averagePrice.toFixed(2) + '\\n' +
-                  'Range: $' + data.data.minPrice.toFixed(2) + ' - $' + data.data.maxPrice.toFixed(2) + '\\n' +
+                  'Average (USD): $' + data.data.averagePrice.toFixed(2) + '\\n' +
+                  'Range (USD): $' + data.data.minPrice.toFixed(2) + ' - $' + data.data.maxPrice.toFixed(2) + '\\n' +
                   'Sample Size: ' + data.data.sampleSize + ' listings\\n\\n' +
                   'Use this as a reference for the Market Price field.');
           } else {
