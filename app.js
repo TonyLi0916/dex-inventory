@@ -9,6 +9,7 @@ const dashboardRoutes = require("./routes/dashboardRoutes");
 const cardsRoutes = require("./routes/cardsRoutes");
 const sealedRoutes = require("./routes/sealedRoutes");
 const compareRoutes = require("./routes/compareRoutes");
+const apiRoutes = require("./routes/api");
 
 const app = express();
 
@@ -56,6 +57,7 @@ app.use("/", dashboardRoutes);
 app.use("/", cardsRoutes);
 app.use("/", sealedRoutes);
 app.use("/", compareRoutes);
+app.use("/", apiRoutes);
 
 // Home route
 app.get("/", (req, res) => {

@@ -1,9 +1,10 @@
-<%- include('../layout', { 
+<%- include('../layout', {
   title: title,
   body: `
     <div class="form-page">
       <h2>Edit Sealed Product</h2>
-      
+      <p style="font-size: 0.85rem; color: #94a3b8; margin-top: -0.5rem; margin-bottom: 1.5rem; text-align: center;">Add as many details to get an accurate price check</p>
+
       <form method="POST" action="/sealed/${sealed.id}/edit">
         <div class="form-row">
           <div class="form-group">
@@ -40,6 +41,9 @@
           <div class="form-group">
             <label for="market_price">Market Price ($) *</label>
             <input type="number" id="market_price" name="market_price" step="0.01" min="0" value="${parseFloat(sealed.market_price).toFixed(2)}" required>
+            <button type="button" id="check-ebay-price-btn" class="btn-small btn-price" style="margin-top: 0.5rem;">
+              Check eBay Price
+            </button>
           </div>
 
           <div class="form-group">
@@ -54,5 +58,47 @@
         </div>
       </form>
     </div>
+
+    <script>
+      document.getElementById('check-ebay-price-btn').addEventListener('click', async function() {
+        const btn = this;
+        const product_name = document.getElementById('product_name').value.trim();
+        const product_type = document.getElementById('product_type').value;
+
+        if (!product_name) {
+          alert('Please enter a product name first');
+          return;
+        }
+
+        btn.disabled = true;
+        btn.innerHTML = '<span class="spinner"></span> Checking...';
+
+        try {
+          const response = await fetch('/api/sealeds/preview-price', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ product_name, product_type })
+          });
+
+          const data = await response.json();
+
+          if (data.success) {
+            alert('eBay Price Check (Active Listings):\\n\\n' +
+                  'Average: $' + data.data.averagePrice.toFixed(2) + '\\n' +
+                  'Range: $' + data.data.minPrice.toFixed(2) + ' - $' + data.data.maxPrice.toFixed(2) + '\\n' +
+                  'Sample Size: ' + data.data.sampleSize + ' listings\\n\\n' +
+                  'Use this as a reference for the Market Price field.');
+          } else {
+            alert(data.error || 'No eBay listings found for this item');
+          }
+        } catch (error) {
+          console.error('Price check failed:', error);
+          alert('Failed to check price. Please try again.');
+        } finally {
+          btn.disabled = false;
+          btn.innerHTML = 'Check eBay Price';
+        }
+      });
+    </script>
   `
 }) %>

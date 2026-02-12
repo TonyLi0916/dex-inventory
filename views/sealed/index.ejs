@@ -42,14 +42,21 @@
             </thead>
             <tbody>
               ${sealed.map(product => `
-                <tr>
+                <tr data-item-id="${product.id}">
                   <td>${product.product_name}</td>
                   <td>${product.product_type}</td>
-                  <td>${product.quantity}</td>
+                  <td class="quantity">${product.quantity}</td>
                   <td>$${parseFloat(product.purchase_price).toFixed(2)}</td>
-                  <td>$${parseFloat(product.market_price).toFixed(2)}</td>
-                  <td>$${(parseFloat(product.market_price) * product.quantity).toFixed(2)}</td>
+                  <td class="market-price">$${parseFloat(product.market_price).toFixed(2)}</td>
+                  <td class="total-value">$${(parseFloat(product.market_price) * product.quantity).toFixed(2)}</td>
                   <td class="action-buttons">
+                    <button
+                      class="btn-small btn-price check-price-btn"
+                      data-item-id="${product.id}"
+                      data-item-type="sealed"
+                      title="Check eBay price">
+                      Check Price
+                    </button>
                     <a href="/sealed/${product.id}/edit" class="btn-small btn-edit">Edit</a>
                     <form method="POST" action="/sealed/${product.id}/delete" style="display: inline;">
                       <button type="submit" class="btn-small btn-delete" onclick="return confirm('Delete this product?')">Delete</button>
@@ -67,5 +74,6 @@
         </div>
       `}
     </div>
+    <script src="/js/price-checker.js"></script>
   `
 }) %>

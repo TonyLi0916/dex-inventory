@@ -43,15 +43,22 @@
             </thead>
             <tbody>
               ${cards.map(card => `
-                <tr>
+                <tr data-item-id="${card.id}">
                   <td>${card.name}</td>
                   <td>${card.set_name || '-'}</td>
                   <td>${card.condition}</td>
-                  <td>${card.quantity}</td>
+                  <td class="quantity">${card.quantity}</td>
                   <td>$${parseFloat(card.purchase_price).toFixed(2)}</td>
-                  <td>$${parseFloat(card.market_price).toFixed(2)}</td>
-                  <td>$${(parseFloat(card.market_price) * card.quantity).toFixed(2)}</td>
+                  <td class="market-price">$${parseFloat(card.market_price).toFixed(2)}</td>
+                  <td class="total-value">$${(parseFloat(card.market_price) * card.quantity).toFixed(2)}</td>
                   <td class="action-buttons">
+                    <button
+                      class="btn-small btn-price check-price-btn"
+                      data-item-id="${card.id}"
+                      data-item-type="card"
+                      title="Check eBay price">
+                      Check Price
+                    </button>
                     <a href="/cards/${card.id}/edit" class="btn-small btn-edit">Edit</a>
                     <form method="POST" action="/cards/${card.id}/delete" style="display: inline;">
                       <button type="submit" class="btn-small btn-delete" onclick="return confirm('Delete this card?')">Delete</button>
@@ -69,5 +76,6 @@
         </div>
       `}
     </div>
+    <script src="/js/price-checker.js"></script>
   `
 }) %>
